@@ -6,7 +6,6 @@ CREATE TABLE "Users" (
   "bio" varchar,
   "username" varchar,
   "password" varchar,
-  "profile_image_url" varchar,
   "created_on" date,
   "active" bit
 );
@@ -46,6 +45,7 @@ CREATE TABLE "Comments" (
   "post_id" INTEGER,
   "author_id" INTEGER,
   "content" varchar,
+  "created_on" varchar,
   FOREIGN KEY(`post_id`) REFERENCES `Posts`(`id`),
   FOREIGN KEY(`author_id`) REFERENCES `Users`(`id`)
 );
@@ -87,3 +87,5 @@ CREATE TABLE "Categories" (
 INSERT INTO Categories ('label') VALUES ('News');
 INSERT INTO Tags ('label') VALUES ('JavaScript');
 INSERT INTO Reactions ('label', 'image_url') VALUES ('happy', 'https://pngtree.com/so/happy');
+INSERT INTO Users ('first_name', 'last_name', 'email', 'bio', 'username', 'password', 'created_on', 'active') VALUES ('Tim', 'Timmons', 'tim@timmons.com', 'tall guy', 'ttimmons', 'tim123', '2021-10-10', True)
+INSERT INTO Comments ('post_id', 'author_id', 'content', 'created_on') VALUES (1, 1, 'milk', '2021-10-10');
