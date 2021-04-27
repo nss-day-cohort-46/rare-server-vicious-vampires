@@ -65,8 +65,10 @@ class HandleRequests(BaseHTTPRequestHandler):
         elif len(parsed) == 3:
             ( resource, key, value ) = parsed
 
-            # if key == "email" and resource == "users":
-            #     response = f"{get_users_by_email(value)}"
+        # resource?key=value
+
+            if key == "user_id" and resource == "posts":
+                response = f"{get_posts_by_user(value)}"
 
         self.wfile.write(response.encode())
 
@@ -85,7 +87,7 @@ class HandleRequests(BaseHTTPRequestHandler):
         new_tag = None
 
         if resource == "comments":
-            new_animal = create_comment(post_body)
+            new_comment = create_comment(post_body)
             self.wfile.write(f"{new_comment}".encode())
 
 
@@ -96,7 +98,7 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         if resource == "posts":
             new_post = create_post(post_body)
-            self.wfile.write(f"{new_post}".encode())
+            self.wfile.write(f"{create_post}".encode())
 
 
         if resource == "tags":
@@ -156,10 +158,6 @@ class HandleRequests(BaseHTTPRequestHandler):
             self._set_headers(204)
         else:
             self._set_headers(404)
-
-
-
-        self.wfile.write("".encode())
 
 def main():
     host = ''
