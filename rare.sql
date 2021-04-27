@@ -83,16 +83,29 @@ CREATE TABLE "Categories" (
   "label" varchar
 );
 
-INSERT INTO Categories ('label') VALUES ('News');
-INSERT INTO Tags ('label') VALUES ('JavaScript');
-INSERT INTO Reactions ('label') VALUES ('happy');
-INSERT INTO Users ('first_name', 'last_name', 'email', 'bio', 'username', 'password', 'created_on', 'active') VALUES ('Tim', 'Timmons', 'tim@timmons.com', 'tall guy', 'ttimmons', 'tim123', '2021-10-10', True);
-INSERT INTO Comments ('post_id', 'author_id', 'content', 'created_on') VALUES (1, 1, 'milk', '2021-10-10');
-INSERT INTO Subscriptions ('follower_id', 'author_id', 'created_on', 'ended_on') VALUES (1, 1, '2021-10-1', '2021-10-10');
+INSERT INTO Category ('label') VALUES ('News');
+INSERT INTO Tag ('label') VALUES ('JavaScript');
+INSERT INTO Reaction ('label') VALUES ('happy');
+INSERT INTO User ('first_name', 'last_name', 'email', 'bio', 'username', 'password', 'created_on', 'active') VALUES ('Tim', 'Timmons', 'tim@timmons.com', 'tall guy', 'ttimmons', 'tim123', '2021-10-10', True);
+INSERT INTO Comment ('post_id', 'author_id', 'content', 'created_on') VALUES (1, 1, 'milk', '2021-10-10');
+INSERT INTO Subscription ('follower_id', 'author_id', 'created_on', 'ended_on') VALUES (1, 1, '2021-10-1', '2021-10-10');
 INSERT INTO DemotionQueue ('action', 'admin_id', 'approver_one_id') VALUES ('run', 1, 1);
-INSERT INTO PostReactions ('user_id', 'reaction_id', 'post_id') VALUES (1, 1, 1);
-INSERT INTO PostTags ('post_id', 'tag_id') VALUES (1, 1);
-INSERT INTO Posts ('user_id', 'category_id', 'title', 'publication_date', 'content', 'approved') VALUES (1, 1, 'mood', '2021-31-3', 'who knows', True);
+INSERT INTO PostReaction ('user_id', 'reaction_id', 'post_id') VALUES (1, 1, 1);
+INSERT INTO PostTag ('post_id', 'tag_id') VALUES (1, 1);
+INSERT INTO Post ('user_id', 'category_id', 'title', 'publication_date', 'content', 'approved') VALUES (1, 1, 'mood', '2021-31-3', 'who knows', True);
 
+
+DROP TABLE Users
+DROP TABLE DemotionQueue
+DROP TABLE Subscriptions
 DROP TABLE Posts
+DROP TABLE Comments
 DROP TABLE Reactions
+DROP TABLE PostReactions
+DROP TABLE Tags
+DROP TABLE PostTags
+DROP TABLE Categories
+
+-- Step 1 Hilight and drop all tables on 98-106
+-- Stept 2 Hilight and Re-create all tables on 1-84. Make sure all table names are changed to Singular
+-- Step 3 Hilight all of the INSERT statements on 86-95 and run
