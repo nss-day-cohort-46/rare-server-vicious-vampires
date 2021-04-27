@@ -1,4 +1,4 @@
-CREATE TABLE "Users" (
+CREATE TABLE "User" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "first_name" varchar,
   "last_name" varchar,
@@ -20,7 +20,7 @@ CREATE TABLE "DemotionQueue" (
 );
 
 
-CREATE TABLE "Subscriptions" (
+CREATE TABLE "Subscription" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "follower_id" INTEGER,
   "author_id" INTEGER,
@@ -30,7 +30,7 @@ CREATE TABLE "Subscriptions" (
   FOREIGN KEY(`author_id`) REFERENCES `Users`(`id`)
 );
 
-CREATE TABLE "Posts" (
+CREATE TABLE "Post" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "user_id" INTEGER,
   "category_id" INTEGER,
@@ -40,7 +40,7 @@ CREATE TABLE "Posts" (
   "approved" bit
 );
 
-CREATE TABLE "Comments" (
+CREATE TABLE "Comment" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "post_id" INTEGER,
   "author_id" INTEGER,
@@ -50,12 +50,12 @@ CREATE TABLE "Comments" (
   FOREIGN KEY(`author_id`) REFERENCES `Users`(`id`)
 );
 
-CREATE TABLE "Reactions" (
+CREATE TABLE "Reaction" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "label" varchar
  );
 
-CREATE TABLE "PostReactions" (
+CREATE TABLE "PostReaction" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "user_id" INTEGER,
   "reaction_id" INTEGER,
@@ -65,12 +65,12 @@ CREATE TABLE "PostReactions" (
   FOREIGN KEY(`post_id`) REFERENCES `Posts`(`id`)
 );
 
-CREATE TABLE "Tags" (
+CREATE TABLE "Tag" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "label" varchar
 );
 
-CREATE TABLE "PostTags" (
+CREATE TABLE "PostTag" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "post_id" INTEGER,
   "tag_id" INTEGER,
@@ -78,7 +78,7 @@ CREATE TABLE "PostTags" (
   FOREIGN KEY(`tag_id`) REFERENCES `Tags`(`id`)
 );
 
-CREATE TABLE "Categories" (
+CREATE TABLE "Category" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "label" varchar
 );

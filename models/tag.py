@@ -1,4 +1,4 @@
 class Tag():
-    def __init__(self, id, label)
+    def __init__(self, id, label):
         self.id = id
         self.label = label
