@@ -95,7 +95,7 @@ def delete_post(id):
         db_cursor = conn.cursor()
 
         db_cursor.execute("""
-        DELTE from Post
+        DELETE from Post
         WHERE id = ?
         """, ( id, ))
 
