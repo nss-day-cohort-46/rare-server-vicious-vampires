@@ -35,7 +35,6 @@ CREATE TABLE "Posts" (
   "category_id" INTEGER,
   "title" varchar,
   "publication_date" date,
-  "image_url" varchar,
   "content" varchar,
   "approved" bit
 );
@@ -52,8 +51,7 @@ CREATE TABLE "Comments" (
 
 CREATE TABLE "Reactions" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-  "label" varchar,
-  "image_url" varchar
+  "label" varchar
 );
 
 CREATE TABLE "PostReactions" (
@@ -86,6 +84,10 @@ CREATE TABLE "Categories" (
 
 INSERT INTO Categories ('label') VALUES ('News');
 INSERT INTO Tags ('label') VALUES ('JavaScript');
-INSERT INTO Reactions ('label', 'image_url') VALUES ('happy', 'https://pngtree.com/so/happy');
-INSERT INTO Users ('first_name', 'last_name', 'email', 'bio', 'username', 'password', 'created_on', 'active') VALUES ('Tim', 'Timmons', 'tim@timmons.com', 'tall guy', 'ttimmons', 'tim123', '2021-10-10', True)
+INSERT INTO Reactions ('label') VALUES ('happy');
+INSERT INTO Users ('first_name', 'last_name', 'email', 'bio', 'username', 'password', 'created_on', 'active') VALUES ('Tim', 'Timmons', 'tim@timmons.com', 'tall guy', 'ttimmons', 'tim123', '2021-10-10', True);
 INSERT INTO Comments ('post_id', 'author_id', 'content', 'created_on') VALUES (1, 1, 'milk', '2021-10-10');
+
+
+DROP TABLE Posts;
+DROP TABLE Reactions;
