@@ -1,8 +1,8 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from categories import get_all_categories, delete_category, update_category, create_category  
-from comments import get_all_comments, update_comment, delete_comment, create_comment, get_comment_by_post
-from posts import get_all_posts, update_post, delete_post, get_posts_by_user, create_post, get_single_post
-from tags import get_all_tags, delete_tag, update_tag, create_tag, get_tag_by_id
+from .categories import get_all_categories, delete_category, update_category, create_category  
+from .comments import get_all_comments, update_comment, delete_comment, create_comment, get_comment_by_post
+from .posts import get_all_posts, update_post, delete_post, get_posts_by_user, create_post, get_single_post
+from .tags import get_all_tags, delete_tag, update_tag, create_tag, get_tag_by_id
 import json
 
 class HandleRequests(BaseHTTPRequestHandler):
