@@ -36,7 +36,6 @@ CREATE TABLE "Posts" (
   "category_id" INTEGER,
   "title" varchar,
   "publication_date" date,
-  "image_url" varchar,
   "content" varchar,
   "approved" bit
 );
@@ -53,9 +52,8 @@ CREATE TABLE "Comments" (
 
 CREATE TABLE "Reactions" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-  "label" varchar,
-  "image_url" varchar
-);
+  "label" varchar
+ );
 
 CREATE TABLE "PostReactions" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -87,11 +85,14 @@ CREATE TABLE "Categories" (
 
 INSERT INTO Categories ('label') VALUES ('News');
 INSERT INTO Tags ('label') VALUES ('JavaScript');
-INSERT INTO Reactions ('label', 'image_url') VALUES ('happy', 'https://pngtree.com/so/happy');
+INSERT INTO Reactions ('label') VALUES ('happy');
 INSERT INTO Users ('first_name', 'last_name', 'email', 'bio', 'username', 'password', 'created_on', 'active') VALUES ('Tim', 'Timmons', 'tim@timmons.com', 'tall guy', 'ttimmons', 'tim123', '2021-10-10', True);
 INSERT INTO Comments ('post_id', 'author_id', 'content', 'created_on') VALUES (1, 1, 'milk', '2021-10-10');
 INSERT INTO Subscriptions ('follower_id', 'author_id', 'created_on', 'ended_on') VALUES (1, 1, '2021-10-1', '2021-10-10');
 INSERT INTO DemotionQueue ('action', 'admin_id', 'approver_one_id') VALUES ('run', 1, 1);
+INSERT INTO PostReactions ('user_id', 'reaction_id', 'post_id') VALUES (1, 1, 1);
+INSERT INTO PostTags ('post_id', 'tag_id') VALUES (1, 1);
+INSERT INTO Posts ('user_id', 'category_id', 'title', 'publication_date', 'content', 'approved') VALUES (1, 1, 'mood', '2021-31-3', 'who knows', True);
 
-
-
+DROP TABLE Posts
+DROP TABLE Reactions
