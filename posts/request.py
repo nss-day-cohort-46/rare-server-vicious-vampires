@@ -7,7 +7,7 @@ def get_all_posts():
 
     with sqlite3.connect("./rare.db") as conn:
         conn.row_factory = sqlite3.Row
-        db_cursor = conn.cursor
+        db_cursor = conn.cursor()
 
         db_cursor.execute("""
         SELECT
@@ -42,7 +42,7 @@ def get_all_posts():
 def get_single_post(id):
     with sqlite3.connect("./rare.db") as conn:
         conn.row_factory = sqlite3.Row
-        db_cursor = conn.cursor
+        db_cursor = conn.cursor()
 
         db_cursor.execute("""
         SELECT
@@ -160,3 +160,4 @@ def get_posts_by_user(user_id):
             posts.append(post.__dict__)
 
     return json.dumps(posts)
+
