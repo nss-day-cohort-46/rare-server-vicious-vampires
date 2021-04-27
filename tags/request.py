@@ -65,7 +65,7 @@ def create_tag(new_tag):
         INSERT INTO Tag
             ( label )
         VALUES
-            ( ?,);
+            ( ? );
         """, (new_tag['label'],
             ))
 
