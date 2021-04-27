@@ -1,4 +1,4 @@
-CREATE TABLE "Users" (
+CREATE TABLE "User" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "first_name" varchar,
   "last_name" varchar,
@@ -20,7 +20,7 @@ CREATE TABLE "DemotionQueue" (
 );
 
 
-CREATE TABLE "Subscriptions" (
+CREATE TABLE "Subscription" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "follower_id" INTEGER,
   "author_id" INTEGER,
@@ -30,7 +30,7 @@ CREATE TABLE "Subscriptions" (
   FOREIGN KEY(`author_id`) REFERENCES `Users`(`id`)
 );
 
-CREATE TABLE "Posts" (
+CREATE TABLE "Post" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "user_id" INTEGER,
   "category_id" INTEGER,
@@ -40,7 +40,7 @@ CREATE TABLE "Posts" (
   "approved" bit
 );
 
-CREATE TABLE "Comments" (
+CREATE TABLE "Comment" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "post_id" INTEGER,
   "author_id" INTEGER,
@@ -50,12 +50,12 @@ CREATE TABLE "Comments" (
   FOREIGN KEY(`author_id`) REFERENCES `Users`(`id`)
 );
 
-CREATE TABLE "Reactions" (
+CREATE TABLE "Reaction" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "label" varchar
  );
 
-CREATE TABLE "PostReactions" (
+CREATE TABLE "PostReaction" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "user_id" INTEGER,
   "reaction_id" INTEGER,
@@ -65,12 +65,12 @@ CREATE TABLE "PostReactions" (
   FOREIGN KEY(`post_id`) REFERENCES `Posts`(`id`)
 );
 
-CREATE TABLE "Tags" (
+CREATE TABLE "Tag" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "label" varchar
 );
 
-CREATE TABLE "PostTags" (
+CREATE TABLE "PostTag" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "post_id" INTEGER,
   "tag_id" INTEGER,
@@ -78,21 +78,21 @@ CREATE TABLE "PostTags" (
   FOREIGN KEY(`tag_id`) REFERENCES `Tags`(`id`)
 );
 
-CREATE TABLE "Categories" (
+CREATE TABLE "Category" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "label" varchar
 );
 
-INSERT INTO Categories ('label') VALUES ('News');
-INSERT INTO Tags ('label') VALUES ('JavaScript');
-INSERT INTO Reactions ('label') VALUES ('happy');
-INSERT INTO Users ('first_name', 'last_name', 'email', 'bio', 'username', 'password', 'created_on', 'active') VALUES ('Tim', 'Timmons', 'tim@timmons.com', 'tall guy', 'ttimmons', 'tim123', '2021-10-10', True);
-INSERT INTO Comments ('post_id', 'author_id', 'content', 'created_on') VALUES (1, 1, 'milk', '2021-10-10');
-INSERT INTO Subscriptions ('follower_id', 'author_id', 'created_on', 'ended_on') VALUES (1, 1, '2021-10-1', '2021-10-10');
+INSERT INTO Category ('label') VALUES ('News');
+INSERT INTO Tag ('label') VALUES ('JavaScript');
+INSERT INTO Reaction ('label') VALUES ('happy');
+INSERT INTO User ('first_name', 'last_name', 'email', 'bio', 'username', 'password', 'created_on', 'active') VALUES ('Tim', 'Timmons', 'tim@timmons.com', 'tall guy', 'ttimmons', 'tim123', '2021-10-10', True);
+INSERT INTO Comment ('post_id', 'author_id', 'content', 'created_on') VALUES (1, 1, 'milk', '2021-10-10');
+INSERT INTO Subscription ('follower_id', 'author_id', 'created_on', 'ended_on') VALUES (1, 1, '2021-10-1', '2021-10-10');
 INSERT INTO DemotionQueue ('action', 'admin_id', 'approver_one_id') VALUES ('run', 1, 1);
-INSERT INTO PostReactions ('user_id', 'reaction_id', 'post_id') VALUES (1, 1, 1);
-INSERT INTO PostTags ('post_id', 'tag_id') VALUES (1, 1);
-INSERT INTO Posts ('user_id', 'category_id', 'title', 'publication_date', 'content', 'approved') VALUES (1, 1, 'mood', '2021-31-3', 'who knows', True);
+INSERT INTO PostReaction ('user_id', 'reaction_id', 'post_id') VALUES (1, 1, 1);
+INSERT INTO PostTag ('post_id', 'tag_id') VALUES (1, 1);
+INSERT INTO Post ('user_id', 'category_id', 'title', 'publication_date', 'content', 'approved') VALUES (1, 1, 'mood', '2021-31-3', 'who knows', True);
 
 DROP TABLE Posts
 DROP TABLE Reactions
