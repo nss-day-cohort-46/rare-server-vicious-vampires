@@ -46,9 +46,9 @@ def update_tag(id, updated_tag):
         db_cursor.execute("""
         UPDATE Tag
             SET
-                label = ?,
+                label = ?
         WHERE id = ?
-        """, (updated_tag['label'], ))
+        """, (updated_tag['label'], id))
 
         rows_affected = db_cursor.rowcount
     

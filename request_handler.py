@@ -165,8 +165,6 @@ class HandleRequests(BaseHTTPRequestHandler):
 
 
 
-        self.wfile.write("".encode())
-
 def main():
     host = ''
     port = 8088
