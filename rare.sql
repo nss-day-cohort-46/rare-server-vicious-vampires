@@ -102,3 +102,19 @@ DROP TABLE Comment
 DROP TABLE Subscription
 
 
+
+
+DROP TABLE Users
+DROP TABLE DemotionQueue
+DROP TABLE Subscriptions
+DROP TABLE Posts
+DROP TABLE Comments
+DROP TABLE Reactions
+DROP TABLE PostReactions
+DROP TABLE Tags
+DROP TABLE PostTags
+DROP TABLE Categories
+
+-- Step 1 Hilight and drop all tables on 98-106
+-- Stept 2 Hilight and Re-create all tables on 1-84. Make sure all table names are changed to Singular
+-- Step 3 Hilight all of the INSERT statements on 86-95 and run
