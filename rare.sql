@@ -107,7 +107,7 @@ DROP TABLE Subscription
 DROP TABLE Users
 DROP TABLE DemotionQueue
 DROP TABLE Subscriptions
-DROP TABLE Posts
+DROP TABLE Post
 DROP TABLE Comments
 DROP TABLE Reactions
 DROP TABLE PostReactions

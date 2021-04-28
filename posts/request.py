@@ -118,7 +118,7 @@ def update_post(id, updated_post):
             updated_post['title'],
             updated_post['publication_date'],
             updated_post['content'],
-            updated_post['approved'], ))
+            updated_post['approved'], id ))
 
         rows_affected = db_cursor.rowcount
     
@@ -129,7 +129,7 @@ def update_post(id, updated_post):
 
 def get_posts_by_user(user_id):
     with sqlite3.connect("./rare.db") as conn:
-        conn.row_factory = sqlite3
+        conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
 
         db_cursor.execute("""

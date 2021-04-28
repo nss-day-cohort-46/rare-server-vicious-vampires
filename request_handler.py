@@ -1,8 +1,9 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from categories import get_all_categories, delete_category, update_category, create_category, get_single_category  
 from comments import get_all_comments, update_comment, delete_comment, create_comment, get_comment_by_post
-from tags import get_all_tags, delete_tag, update_tag, create_tag, get_single_tag
 from posts import get_all_posts, update_post, delete_post, get_posts_by_user, create_post, get_single_post
+from users import get_all_users, get_single_user, create_user
+from tags import get_all_tags, delete_tag, update_tag, create_tag, get_single_tag
 import json
 
 class HandleRequests(BaseHTTPRequestHandler):
@@ -67,11 +68,18 @@ class HandleRequests(BaseHTTPRequestHandler):
                     response = f"{get_comment_by_post(id)}"
                 else:
                     response =f"{get_all_comments()}"
+            if resource == "users":
+                if id is not None:
+                    response = f"{get_single_user(id)}"
+                else:
+                    response = f"{get_all_users()}"
+                    
             if resource == "categories":
                 if id is not None:
                     response = f"{get_single_category(id)}"
                 else:
                     response = f"{get_all_categories()}"
+                    
             if resource == "tags":
                 if id is not None:
                     response = f"{get_single_tag(id)}"
@@ -81,8 +89,10 @@ class HandleRequests(BaseHTTPRequestHandler):
         elif len(parsed) == 3:
             ( resource, key, value ) = parsed
 
-            # if key == "email" and resource == "users":
-            #     response = f"{get_users_by_email(value)}"
+        # resource?key=value
+
+            if key == "user_id" and resource == "posts":
+                response = f"{get_posts_by_user(value)}"
 
         self.wfile.write(response.encode())
 
@@ -99,6 +109,7 @@ class HandleRequests(BaseHTTPRequestHandler):
         new_category = None
         new_post = None
         new_tag = None
+        new_user = None
 
         if resource == "comments":
             new_comment = create_comment(post_body)
@@ -112,12 +123,16 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         if resource == "posts":
             new_post = create_post(post_body)
-            self.wfile.write(f"{new_post}".encode())
+            self.wfile.write(f"{create_post}".encode())
 
 
         if resource == "tags":
             new_tag = create_tag(post_body)
             self.wfile.write(f"{new_tag}".encode())
+        
+        if resource == "users":
+            new_tag = create_user(post_body)
+            self.wfile.write(f"{new_user}".encode())
 
 
 
@@ -172,8 +187,6 @@ class HandleRequests(BaseHTTPRequestHandler):
             self._set_headers(204)
         else:
             self._set_headers(404)
-
-
 
         # self.wfile.write("".encode())
 
