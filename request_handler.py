@@ -127,16 +127,16 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         if resource == "posts":
             new_post = create_post(post_body)
-            self.wfile.write(f"{create_post}".encode())
+            self.wfile.write(f"{new_post}".encode())
 
 
         if resource == "tags":
             new_tag = create_tag(post_body)
             self.wfile.write(f"{new_tag}".encode())
         
-        if resource == "users":
-            new_tag = create_user(post_body)
-            self.wfile.write(f"{new_user}".encode())
+        if resource == "register":
+            new_user = create_user(post_body)
+            self.wfile.write(new_user.encode())
 
         if resource == "login":
             new_login = get_user_by_email_and_password(post_body)
