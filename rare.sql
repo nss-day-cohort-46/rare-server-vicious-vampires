@@ -94,6 +94,15 @@ INSERT INTO PostReaction ('user_id', 'reaction_id', 'post_id') VALUES (1, 1, 1);
 INSERT INTO PostTag ('post_id', 'tag_id') VALUES (1, 1);
 INSERT INTO Post ('user_id', 'category_id', 'title', 'publication_date', 'content', 'approved') VALUES (1, 1, 'mood', '2021-31-3', 'who knows', True);
 
+DROP TABLE Category
+DROP TABLE Tag
+DROP TABLE Reaction
+DROP TABLE User
+DROP TABLE Comment
+DROP TABLE Subscription
+
+
+
 
 DROP TABLE Users
 DROP TABLE DemotionQueue

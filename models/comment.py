@@ -1,1 +1,1 @@
-# class Comment():
+class Comment():

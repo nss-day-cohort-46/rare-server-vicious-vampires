@@ -1,5 +1,5 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from categories import get_all_categories, delete_category, update_category, create_category  
+from categories import get_all_categories, delete_category, update_category, create_category, get_single_category  
 from comments import get_all_comments, update_comment, delete_comment, create_comment, get_comment_by_post
 from tags import get_all_tags, delete_tag, update_tag, create_tag, get_single_tag
 from posts import get_all_posts, update_post, delete_post, get_posts_by_user, create_post, get_single_post
@@ -62,6 +62,11 @@ class HandleRequests(BaseHTTPRequestHandler):
                 else:
                     response = f"{get_all_posts()}"
 
+            if resource == "categories":
+                if id is not None:
+                    response = f"{get_single_category(id)}"
+                else:
+                    response = f"{get_all_categories()}"
             if resource == "tags":
                 if id is not None:
                     response = f"{get_single_tag(id)}"
@@ -91,7 +96,7 @@ class HandleRequests(BaseHTTPRequestHandler):
         new_tag = None
 
         if resource == "comments":
-            new_animal = create_comment(post_body)
+            new_comment = create_comment(post_body)
             self.wfile.write(f"{new_comment}".encode())
 
 
