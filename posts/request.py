@@ -74,8 +74,13 @@ def create_post(new_post):
         db_cursor = conn.cursor()
 
         db_cursor.execute("""
+<<<<<<< HEAD
+        INSERT INTO Posts
+            ( user_id, category_id, title, publication_date, content, approved )
+=======
         INSERT INTO Post
             ( label )
+>>>>>>> main
         VALUES
             ( ?);
         """, (new_post['label'], ))

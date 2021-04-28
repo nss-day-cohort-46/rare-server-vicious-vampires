@@ -63,6 +63,11 @@ class HandleRequests(BaseHTTPRequestHandler):
                 else:
                     response = f"{get_all_posts()}"
 
+            if resource == "comments":
+                if id is not None:
+                    response = f"{get_comment_by_post(id)}"
+                else:
+                    response =f"{get_all_comments()}"
             if resource == "users":
                 if id is not None:
                     response = f"{get_single_user(id)}"
@@ -138,7 +143,7 @@ class HandleRequests(BaseHTTPRequestHandler):
         # Parse the URL
         (resource, id) = self.parse_url(self.path)
 
-        # Delete a single animal from the list
+        # Delete a single object from the list
         if resource == "categories":
             delete_category(id)
             self.wfile.write("".encode())
@@ -182,6 +187,8 @@ class HandleRequests(BaseHTTPRequestHandler):
             self._set_headers(204)
         else:
             self._set_headers(404)
+
+        # self.wfile.write("".encode())
 
 def main():
     host = ''
