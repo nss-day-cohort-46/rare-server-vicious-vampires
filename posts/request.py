@@ -74,16 +74,11 @@ def create_post(new_post):
         db_cursor = conn.cursor()
 
         db_cursor.execute("""
-<<<<<<< HEAD
         INSERT INTO Posts
             ( user_id, category_id, title, publication_date, content, approved )
-=======
-        INSERT INTO Post
-            ( label )
->>>>>>> main
         VALUES
             ( ?);
-        """, (new_post['label'], ))
+        """, (new_post['user_id'], new_post['category_id'], new_post['title'], new_post['publication_date'], new_post['content'], new_post['approved']))
 
         id = db_cursor.lastrowid
         new_post['id'] = id

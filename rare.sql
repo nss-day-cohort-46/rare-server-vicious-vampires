@@ -118,3 +118,8 @@ DROP TABLE Categories
 -- Step 1 Hilight and drop all tables on 98-106
 -- Stept 2 Hilight and Re-create all tables on 1-84. Make sure all table names are changed to Singular
 -- Step 3 Hilight all of the INSERT statements on 86-95 and run
+
+
+SELECT u.id
+FROM User u
+WHERE u.email = 'tim@timmons.com' AND u.password = 'tim123'
