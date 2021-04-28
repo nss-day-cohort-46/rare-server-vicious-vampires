@@ -2,7 +2,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from categories import get_all_categories, delete_category, update_category, create_category, get_single_category  
 from comments import get_all_comments, update_comment, delete_comment, create_comment, get_comment_by_post
 from posts import get_all_posts, update_post, delete_post, get_posts_by_user, create_post, get_single_post
-from users import get_all_users, get_single_user, create_user
+from users import get_all_users, get_single_user, create_user, get_user_by_email_and_password
 from tags import get_all_tags, delete_tag, update_tag, create_tag, get_single_tag
 import json
 
@@ -110,6 +110,7 @@ class HandleRequests(BaseHTTPRequestHandler):
         new_post = None
         new_tag = None
         new_user = None
+        new_login = None
 
         if resource == "comments":
             new_comment = create_comment(post_body)
@@ -123,7 +124,7 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         if resource == "posts":
             new_post = create_post(post_body)
-            self.wfile.write(f"{create_post}".encode())
+            self.wfile.write(f"{new_post}".encode())
 
 
         if resource == "tags":
@@ -135,8 +136,8 @@ class HandleRequests(BaseHTTPRequestHandler):
             self.wfile.write(f"{new_user}".encode())
 
         if resource == "login":
-            new_login = 
-
+            new_login = get_user_by_email_and_password(post_body)
+            self.wfile.write(f"{new_login}".encode())
 
 
     def do_DELETE(self):
