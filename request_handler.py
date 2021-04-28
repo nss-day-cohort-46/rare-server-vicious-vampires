@@ -134,6 +134,9 @@ class HandleRequests(BaseHTTPRequestHandler):
             new_tag = create_user(post_body)
             self.wfile.write(f"{new_user}".encode())
 
+        if resource == "login":
+            new_login = 
+
 
 
     def do_DELETE(self):

@@ -85,17 +85,36 @@ def create_user(new_user):
         INSERT INTO User
             ( first_name, last_name, email, bio, username, password, created_on, active )
         VALUES
-            ( ?, ?, ?, ?, ?, ?);
-        """, (new_post['first_name'],
-            new_post['last_name'],
-            new_post['email'],
-            new_post['bio'],
-            new_post['username'],
-            new_post['password'],
-            new_post['created_on'],
-            new_post['active'], ))
+            ( ?, ?, ?, ?, ?, ?, ?, ?);
+        """, (new_user['first_name'],
+            new_user['last_name'],
+            new_user['email'],
+            new_user['bio'],
+            new_user['username'],
+            new_user['password'],
+            new_user['created_on'],
+            new_user['active'], ))
 
         id = db_cursor.lastrowid
         new_user['id'] = id
 
     return json.dumps(new_user)
+
+def get_user_by_email_and_password(email, password)
+    with sqlite3.connect("./rare.db") as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        SELECT u.id
+        FROM User u
+        WHERE u.email = ? AND u.password = ?
+        """, (email, password))
+
+        data = db_cursor.fetchone()
+
+        user = {
+            "valid": "valid",
+            "token": data['id']
+        }
+    return json.dumps(user)
