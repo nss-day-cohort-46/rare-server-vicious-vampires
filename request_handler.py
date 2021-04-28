@@ -4,7 +4,7 @@ from categories import get_all_categories, delete_category, update_category, cre
 from comments import get_all_comments, update_comment, delete_comment, create_comment, get_comment_by_post
 from posts import get_all_posts, update_post, delete_post, get_posts_by_user, create_post, get_single_post
 from users import get_all_users, get_single_user
-from tags import get_all_tags, delete_tag, update_tag, create_tag, get_tag_by_id
+from tags import get_all_tags, delete_tag, update_tag, create_tag, get_single_tag
 import json
 
 class HandleRequests(BaseHTTPRequestHandler):
@@ -69,6 +69,12 @@ class HandleRequests(BaseHTTPRequestHandler):
                     response = f"{get_single_user(id)}"
                 else:
                     response = f"{get_all_users()}"
+                    
+            if resource == "tags":
+                if id is not None:
+                    response = f"{get_single_tag(id)}"
+                else:
+                    response = f"{get_all_tags()}"
 
         elif len(parsed) == 3:
             ( resource, key, value ) = parsed
