@@ -33,6 +33,8 @@ class HandleRequests(BaseHTTPRequestHandler):
             key = pair[0]
             value = pair[1]
 
+
+
             return ( resource, key, value )
 
         else:
@@ -94,6 +96,7 @@ class HandleRequests(BaseHTTPRequestHandler):
             if key == "user_id" and resource == "posts":
                 response = f"{get_posts_by_user(value)}"
 
+        
         self.wfile.write(response.encode())
 
     def do_POST(self):

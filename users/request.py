@@ -113,6 +113,7 @@ def get_user_by_email_and_password(email_and_password):
         WHERE u.email = ? AND u.password = ?
         """, (email, password))
 
+
         data = db_cursor.fetchone()
 
         user = {
