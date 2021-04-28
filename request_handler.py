@@ -1,4 +1,3 @@
-from categories.request import get_single_category
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from categories import get_all_categories, delete_category, update_category, create_category, get_single_category  
 from comments import get_all_comments, update_comment, delete_comment, create_comment, get_comment_by_post

@@ -1,6 +1,6 @@
 import sqlite3
 import json
-from models import Category, category
+from models import Category
 
 def get_all_categories():
     # Open a connection to the database
@@ -73,16 +73,15 @@ def delete_category(id):
         """, (id, ))
 
 def update_category(id, new_category):
-    with sqlite3.connect("./rate.db") as conn:
+    with sqlite3.connect("./rare.db") as conn:
         db_cursor = conn.cursor()
 
         db_cursor.execute("""
         UPDATE Category
             SET 
-                label = ?
-                
+                label = ?          
         WHERE id = ?
-        """, (new_category['label'], id, ))
+        """, (new_category['label'], id ))
 
         # Were any rows affected?
         # Did the client send an `id` that exists?
