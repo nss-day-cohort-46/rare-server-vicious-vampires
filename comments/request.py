@@ -72,7 +72,7 @@ def update_comment(id, updated_comment):
                 post_id = ?,
                 author_id = ?,
                 content = ?,
-                created_on = ?,
+                created_on = ?
         WHERE id = ?
         """, (updated_comment['post_id'], updated_comment['author_id'],
             updated_comment['content'], updated_comment['created_on'], id, ))
@@ -86,7 +86,7 @@ def update_comment(id, updated_comment):
 
 def get_comment_by_post(post_id):
     with sqlite3.connect("./rare.db") as conn:
-        conn.row_factory = sqlite3
+        conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
 
         db_cursor.execute("""
@@ -96,7 +96,7 @@ def get_comment_by_post(post_id):
             c.author_id,
             c.content,
             c.created_on
-        FROM Comments c
+        FROM Comment c
         WHERE c.post_id = ?
         """, (post_id,))
 
