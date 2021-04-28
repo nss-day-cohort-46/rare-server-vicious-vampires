@@ -100,16 +100,19 @@ def create_user(new_user):
 
     return json.dumps(new_user)
 
-def get_user_by_email_and_password(email, password)
+def get_user_by_email_and_password(email_and_password):
     with sqlite3.connect("./rare.db") as conn:
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
+        email = email_and_password["username"]
+        password = email_and_password["password"]
 
         db_cursor.execute("""
         SELECT u.id
         FROM User u
         WHERE u.email = ? AND u.password = ?
         """, (email, password))
+
 
         data = db_cursor.fetchone()
 
