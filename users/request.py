@@ -1,4 +1,4 @@
-from models import User
+from models import User, user
 import sqlite3
 import json
 
@@ -29,7 +29,7 @@ def get_all_users():
 
         for row in dataset:
 
-            post = User(row['id'],
+            user = User(row['id'],
                     row['first_name'],
                     row['last_name'],
                     row['email'],
@@ -39,7 +39,7 @@ def get_all_users():
                     row['created_on'],
                     row['active'])
 
-            users.append(post.__dict__)
+            users.append(user.__dict__)
 
     return json.dumps(users)
 
@@ -65,7 +65,7 @@ def get_single_user(id):
 
         data = db_cursor.fetchone()
 
-        post = User(data['id'],
+        user = User(data['id'],
                     data['first_name'],
                     data['last_name'],
                     data['email'],
@@ -75,7 +75,7 @@ def get_single_user(id):
                     data['created_on'],
                     data['active'])
 
-        return json.dumps(post.__dict__)
+        return json.dumps(user.__dict__)
 
 def create_user(new_user):
     with sqlite3.connect("./rare.db") as conn:
