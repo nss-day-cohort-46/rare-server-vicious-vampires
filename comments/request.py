@@ -1,4 +1,5 @@
 from models import Comment
+from models import Post
 import sqlite3
 import json
 
@@ -84,7 +85,7 @@ def update_comment(id, updated_comment):
     else:
         return True
 
-def get_comment_by_post(post_id):
+def get_comment_by_id(id):
     with sqlite3.connect("./rare.db") as conn:
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
@@ -97,19 +98,16 @@ def get_comment_by_post(post_id):
             c.content,
             c.created_on
         FROM Comment c
-        WHERE c.post_id = ?
-        """, (post_id,))
+        WHERE c.id = ?
+        """, (id,))
 
-        comments = []
-        dataset = db_cursor.fetchall()
-
-        for row in dataset:
-            comment = Comment(row['id'],
-                    row['post_id'],
-                    row['author_id'],
-                    row['content'],
-                    row['created_on'],)
-
-            comments.append(comment.__dict__)
-
-    return json.dumps(comments)
+        # comments = []
+        data = db_cursor.fetchone()
+      
+        comment = Comment(data['id'],
+                data['post_id'],
+                data['author_id'],
+                data['content'],
+                data['created_on'], )
+        
+        return json.dumps(comment.__dict__)
