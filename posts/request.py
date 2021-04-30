@@ -1,3 +1,4 @@
+from models import Category
 from models import Post
 import sqlite3
 import json
@@ -17,8 +18,11 @@ def get_all_posts():
             p.title,
             p.publication_date,
             p.content,
-            p.approved
+            p.approved,
+            c.label
         FROM Post p
+        JOIN Category c
+            ON c.id = p.category_id
         """)
 
         posts = []
@@ -34,6 +38,9 @@ def get_all_posts():
                     row['publication_date'],
                     row['content'],
                     row['approved'])
+
+            category = Category(row['id'], row['label'])
+            post.category = category.__dict__
 
             posts.append(post.__dict__)
 
@@ -52,8 +59,11 @@ def get_single_post(id):
             p.title,
             p.publication_date,
             p.content,
-            p.approved
+            p.approved,
+            c.label
         FROM Post p
+        JOIN Category c
+            ON c.id = p.category_id
         WHERE p.id = ?
         """, ( id, ))
 
@@ -66,6 +76,9 @@ def get_single_post(id):
                     data['publication_date'],
                     data['content'],
                     data['approved'])
+
+        category = Category(data['id'], data['label'])
+        post.category = category.__dict__
 
         return json.dumps(post.__dict__) 
 
