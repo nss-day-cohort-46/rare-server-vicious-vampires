@@ -1,5 +1,6 @@
 from models import Category
 from models import Post
+from models import User
 import sqlite3
 import json
 
@@ -19,10 +20,20 @@ def get_all_posts():
             p.publication_date,
             p.content,
             p.approved,
-            c.label
+            c.label,
+            u.first_name,
+            u.last_name,
+            u.email,
+            u.bio,
+            u.username,
+            u.password,
+            u.created_on,
+            u.active
         FROM Post p
         JOIN Category c
             ON c.id = p.category_id
+        JOIN User u
+            ON u.id = p.user_id
         """)
 
         posts = []
@@ -41,6 +52,17 @@ def get_all_posts():
 
             category = Category(row['id'], row['label'])
             post.category = category.__dict__
+            
+            user = User(row['id'],
+                        row['first_name'],
+                        row['last_name'],
+                        row['email'],
+                        row['bio'],
+                        row['username'],
+                        row['password'],
+                        row['created_on'],
+                        row['active'], )
+            post.user = user.__dict__
 
             posts.append(post.__dict__)
 
@@ -60,10 +82,20 @@ def get_single_post(id):
             p.publication_date,
             p.content,
             p.approved,
-            c.label
+            c.label,
+            u.first_name,
+            u.last_name,
+            u.email,
+            u.bio,
+            u.username,
+            u.password,
+            u.created_on,
+            u.active
         FROM Post p
         JOIN Category c
             ON c.id = p.category_id
+        JOIN User u
+            ON u.id = p.user_id
         WHERE p.id = ?
         """, ( id, ))
 
@@ -79,6 +111,17 @@ def get_single_post(id):
 
         category = Category(data['id'], data['label'])
         post.category = category.__dict__
+
+        user = User(data['id'],
+                    data['first_name'],
+                    data['last_name'],
+                    data['email'],
+                    data['bio'],
+                    data['username'],
+                    data['password'],
+                    data['created_on'],
+                    data['active'], )
+        post.user = user.__dict__
 
         return json.dumps(post.__dict__) 
 
